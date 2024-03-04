@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Innoving 2030</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="loading" id="loading" style="display: none;">Loading&#8230;</div>
+
+
+            <div class="section">
+                <div class="d-flex">
+                    <div class="mx-auto">
+                        <form>
+                            <h1>Ingreso de Datos</h1>
+                        
+                            <fieldset>
+                                <legend><span class="number">1</span> Datos Personales</legend>
+                                
+                                <div class="top-row">
+                                    <div class="field-wrap">
+                                        <label for="age">Edad:</label>
+                                        <input type="number" id="age" name="patient_age" required >
+                                    </div>
+            
+                                    <div class="field-wrap">
+                                        <label>Sexo:</label>
+                                        <input type="radio" id="sex_female" value="F" name="patient_sex" checked><label for="sex_female" class="light">Femenino</label><br>
+                                        <input type="radio" id="sex_male" value="M" name="patient_sex"><label for="sex_male" class="light">Masculino</label>
+                                    </div>
+                                </div>
+                                
+                            </fieldset>
+                            <fieldset>  
+                        
+                            <legend><span class="number">2</span> Resulados de Examen</legend>
+                            
+                            <div class="">
+                                <div class="field-wrap">
+                                    <label for="hba1c">HbA1c:</label>
+                                    <input type="number" id="hba1c" name="patient_hba1c" required>
+                                </div>
+                                <div class="field-wrap">
+                                    <label for="bmi">BMI:</label>
+                                    <input type="number" id="bmi" name="patient_bmi" required>
+                    
+                                </div>
+                            </div>
+        
+                            <div class="top-row">
+                                <div class="field-wrap">
+                                    <label for="homa2b">HOMA2-B:</label>
+                                    <input type="number" id="homa2b" name="patient_homa2b" required>
+                                </div>
+                                <div class="field-wrap">
+                                    <label for="homa2ir">HOMA2-IR:</label>
+                                    <input type="number" id="homa2ir" name="patient_homa2ir" required>
+                    
+                                </div>
+                            </div>
+        
+                            <label for="gada">GADA:</label>
+                            <select id="gada" name="patient_gada">
+                                <option value="negativo">Negativo</option>
+                                <option value="positivo">Positivo</option>
+                                
+                            </select>
+                            
+        
+                            </fieldset>
+                        
+                            <button type="button" onclick="calcular()">Calcular</button>
+                        
+                        </form>
+                        
+                    </div>
+                    <div class="col-6">
+                        
+                        <div class="blog-card spring-fever">
+                            
+                        <div class="title-content">
+                            <h3><a href="#" id="titulo_cluster">Prototipo de software para la subclasificación de diabéticos tipo 2.</a></h3>
+                            <div class="intro"> <a href="#" id="advertencia">Inspiration</a> </div>
+                        </div>
+                        <div class="card-info" id="resultados-del-calculo">
+                            La diabetes mellitus (DM) es un gran problema por su creciente incidencia y costos asociados al tratamiento y complicaciones. Se propone un software para clasificar a los diabéticos tipo 2 en subgrupos, permitiendo tratamientos personalizados y mejorando la atención en Chile. Este avance también beneficia la investigación y nos posiciona en la vanguardia del manejo de estos pacientes.
+                        </div>
+                        <div class="gradient-overlay"></div>
+                        <div class="color-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+        <footer class="site-footer">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6">
+                    <h6>About</h6>
+                    <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras quis ultrices sapien. Aenean leo enim, rhoncus maximus ante vitae, ultrices sodales augue. Ut vulputate risus diam, at condimentum turpis congue vel. Nunc ut enim sit amet dolor vulputate rutrum. Aenean facilisis varius sollicitudin. Vivamus luctus ante sed porta molestie.</p>
+                  </div>
+
+      
+                <div class="col-md-2">
+                  <h6>Lorem ipsum</h6>
+                  <img src="Logo-CI2030-03.png" width="100"/>
+                </div>
+
+                <div class="col-md-2">
+                    <h6>Lorem ipsum</h6>
+                    <img src="inniving_logo.svg" width="200" style="padding-top: 10px;"/>
+                </div>
+
+                <div class="col-md-2">
+                    <h6>Quick Links</h6>
+                    <ul class="footer-links">
+                        <li><a href="http://scanfcode.com/about/">Paper</a></li>
+                        <li><a href="http://scanfcode.com/contact/">Contact</a></li>
+                        <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
+                    </ul>
+                </div>
+              </div>
+              <hr>
+            </div>
+      </footer>
+          
+    </body>
+    <script>
+        function calculo_cluster(Sex, values) {
+            const W = [
+                [1.8702613, -0.2415449, -0.1929637, -0.97446899, 0.056469],
+                [-0.254848, 0.5189057, 0.3214557, 1.35581907, 1.1801933],
+                [-0.3003478, 0.6683606, -0.9388278, -0.03556857, -0.1405151],
+                [-0.4582762, -0.5854255, 0.5980588, -0.14552652, -0.4254893]
+            ];
+    
+            const M = [
+                [1.52185804, -0.4284673, -0.4017103, -0.98397328, -0.1630751],
+                [-0.39080167, 0.5396294, 0.4235841, 1.29059153, 1.1801031],
+                [-0.06915764, 1.0305317, -1.0157681, 0.15742215, 0.1343923],
+                [-0.5367578, -0.4776681, 0.5031031, -0.09004338, -0.4233873]
+            ];
+            console.log("sex: ",Sex);
+            console.log("valores: ",values);
+            
+    
+            if (values[values.length - 1] === 'positivo') {
+                
+                return [1, 'not'];
+            } else {
+                const lista = values.slice(0, -1);
+                const mean = [62.32, 30.93, 60.93, 91.95, 3.41];
+                const std = [24.12, 5.72, 12.25, 48.19, 2.55];
+                const punto = lista.map((value, index) => (value - mean[index]) / std[index]);
+    
+                if (Sex === 'W') {
+                    const centroides = W;
+                    const distancias = centroides.map((centroid) =>
+                        Math.sqrt(
+                            centroid.reduce(
+                                (sum, val, index) => sum + Math.pow(val - punto[index], 2),
+                                0
+                            )
+                        )
+                    );
+                    return [distancias.indexOf(Math.min(...distancias)) + 2, distancias];
+                }
+    
+                if (Sex === 'M') {
+                    const centroides = M;
+                    const distancias = centroides.map((centroid) =>
+                        Math.sqrt(
+                            centroid.reduce(
+                                (sum, val, index) => sum + Math.pow(val - punto[index], 2),
+                                0
+                            )
+                        )
+                    );
+                    return [distancias.indexOf(Math.min(...distancias)) + 2, distancias];
+                }
+            }
+        }
+    
+        function calcular() {
+
+            let age = document.getElementById('age');
+            let sexo_f = document.getElementById('sex_female');
+
+            let sexo = sexo_f.checked ? 'W': 'M'; 
+            
+            let hba1c = document.getElementById('hba1c');
+            let bmi = document.getElementById('bmi');
+            
+            let homa2b = document.getElementById('homa2b');
+            let homa2ir = document.getElementById('homa2ir');
+            let gada = document.getElementById('gada');
+    
+            let Values = [  hba1c.value,
+                            bmi.value,
+                            age.value,
+                            homa2b.value,
+                            homa2ir.value,
+                            gada.value
+                            ];
+
+            const result = calculo_cluster(sexo, Values);
+    
+            if (result!==undefined){
+                imprimirResultado(result[0]);
+            }else{
+                imprimirResultado("Error al ingreso de datos");
+            }
+        }
+    
+        function imprimirResultado(cluster){
+
+            mostrarCargando();
+
+            let titulo = document.getElementById('titulo_cluster');
+            let Titulo_resultado = "Resultado: Cluster " + cluster;
+
+
+            setTimeout(function() {
+                // Ocultar el mensaje de carga después de 3 segundos (simulación)
+                titulo.innerHTML = Titulo_resultado;
+              }, 1000);
+
+           
+
+           
+            let mensaje_C1 = "Diabetes temprana. Peso relativamente bajo y dificultades para controlar el azúcar en la sangre. También, el cuerpo produce poca insulina y hay ciertos signos en la sangre relacionados con el sistema inmunológico.";
+            let mensaje_C2 = "Diabetes severamente deficiente en insulina. Aunque no hay señales en la sangre relacionadas con el sistema inmunológico, es probable que cueste producir suficiente insulina y controlar tu azúcar en la sangre.";
+            let mensaje_C3 = "Diabetes severamente resistente a la insulina. El cuerpo tiene dificultad para que la insulina funcione de manera efectiva. Además, un peso más alto que otros grupos diagnosticados con diabetes.";
+            let mensaje_C4 = "Diabetes relacionada con la obesidad en un grado leve. Aunque se posee sobrepeso, no se enfrenta a tanta dificultad con la insulina como lo hacen aquellos en otros diagnósticos.";
+            let mensaje_C5 = "Diabetes relacionada con la edad de forma leve. Se posee una edad mayor en comparación con los pacientes en otros grupos, pero al igual que en algunos otros diagnósticos, solo se precentan desequilibrios metabólicos moderados.";
+            
+            let texto = document.getElementById('resultados-del-calculo');
+
+            let advertencia = document.getElementById('advertencia');
+            advertencia.style.color = "white";
+            switch (cluster) {
+                case 1:
+                    texto.innerHTML = mensaje_C1;
+                    advertencia.innerHTML = "Descripcion";
+                    break;
+                case 2:
+
+                    texto.innerHTML = mensaje_C2;
+                    advertencia.style.color = "#CF231A";
+                    advertencia.innerHTML = "¡Atención!";
+                    break;
+                case 3:
+                    texto.innerHTML = mensaje_C3;
+                    advertencia.style.color = "#CF231A";
+                    advertencia.innerHTML = "¡Atención!";
+                    break;
+                case 4:
+                    texto.innerHTML = mensaje_C4;
+                    advertencia.innerHTML = "Descripcion";
+                    break;
+                case 5:
+                    texto.innerHTML = mensaje_C5;
+                    advertencia.innerHTML = "Descripcion";
+                    break;
+                default:
+                  console.log(`Sorry, we are out of ${expr}.`);
+              }
+            
+            
+    
+            // agregar los logos de innoving, ciencias, link al paper, (podria ser el de la uach) ()
+            // titulo del proyecto ()
+            // Trabajo [nommbre del articulo] ()
+            // Boton de seleccion para sexo y gada (listo)
+            // definicion de cluster  (listo)
+            // A la derecha el cluster en un recuadro (listo)
+            // resaltar el resultado del cluster (listo)
+            // advertencia para cluster 2 y 3 ()
+            // 
+        }
+    
+        function imprimirError(textError){
+            let texto = document.getElementById('resultados-del-calculo');
+            texto.innerHTML = textError;
+           
+        }
+
+
+
+
+        function mostrarCargando() {
+            let loading = document.getElementById('loading');
+            loading.style.display = 'block';
+            
+            // Simular una carga (aquí puedes hacer una llamada a un servidor o realizar alguna operación)
+            setTimeout(function() {
+              // Ocultar el mensaje de carga después de 3 segundos (simulación)
+              loading.style.display = 'none';
+            }, 1000);
+          }
+          
+    </script>
+</html>
